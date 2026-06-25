@@ -1,0 +1,28 @@
+# Environment
+.env
+
+# Virtual Environment
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# VSCode
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+data/raw/
+data/processed/
+
+# dbt
+target/
+dbt_packages/
+
+# OS
+.DS_Store
+Thumbs.db
