@@ -31,7 +31,8 @@ def home():
 # -------------------------
 # 1. TOP PRODUCTS
 # -------------------------
-@app.get("/api/reports/top-products", response_model=TopProductsResponse)
+@app.get("/api/reports/top-products",summary="Top Products",
+    description="Returns the most frequently mentioned products across all Telegram channels.", response_model=TopProductsResponse)
 def top_products(limit: int = Query(10, ge=1, le=100)):
     with engine.connect() as conn:
         result = conn.execute(text(get_top_products(limit)))
@@ -43,7 +44,8 @@ def top_products(limit: int = Query(10, ge=1, le=100)):
 # -------------------------
 # 2. CHANNEL ACTIVITY
 # -------------------------
-@app.get("/api/channels/{channel_name}/activity", response_model=ChannelActivityResponse)
+@app.get("/api/channels/{channel_name}/activity",    summary="Channel Activity",
+    description="Returns posting activity and engagement metrics for a Telegram channel.", response_model=ChannelActivityResponse)
 def channel_activity(channel_name: str):
     with engine.connect() as conn:
         result = conn.execute(text(get_channel_activity(channel_name)))
@@ -55,7 +57,8 @@ def channel_activity(channel_name: str):
 # -------------------------
 # 3. MESSAGE SEARCH
 # -------------------------
-@app.get("/api/search/messages", response_model=MessageSearchResponse)
+@app.get("/api/search/messages",summary="Search Messages",
+    description="Searches messages containing a specific keyword.", response_model=MessageSearchResponse)
 def message_search(
     query: str,
     limit: int = Query(20, ge=1, le=100)
@@ -73,7 +76,8 @@ def message_search(
 # -------------------------
 # 4. VISUAL CONTENT STATS
 # -------------------------
-@app.get("/api/reports/visual-content", response_model=VisualContentResponse)
+@app.get("/api/reports/visual-content",summary="Visual Content Statistics",
+    description="Returns statistics about image usage across Telegram channels.", response_model=VisualContentResponse)
 def visual_content():
     with engine.connect() as conn:
         result = conn.execute(text(get_visual_content_stats()))
